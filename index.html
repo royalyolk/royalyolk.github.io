@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover"
+    />
+    <title>
+      Royal Yolk JS Farms | Fresh White Eggs - Rawalpindi & Islamabad
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+	
+	    <!--EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+	
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+      * {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .hero-bg {
+        background-image:
+          linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)),
+          url("https://69d3873004b4f2ffdfee856d.imgix.net/background/image.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .logo-img {
+        height: 65px;
+        width: auto;
+        object-fit: contain;
+      }
+      .farm-img {
+        transition: transform 0.4s ease;
+      }
+      .farm-img:hover {
+        transform: scale(1.02);
+      }
+
+      #mobile-menu {
+        display: none;
+      }
+
+      .cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -12px;
+        background-color: #059669;
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .product-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(5, 150, 105, 0.12);
+        background: white;
+      }
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.12);
+        border-color: rgba(5, 150, 105, 0.3);
+      }
+
+      .tray-img {
+        width: 100%;
+        max-height: 150px;
+        object-fit: contain;
+        filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.08));
+      }
+
+      .modal {
+        transition: opacity 0.25s ease;
+      }
+
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        .logo-img {
+          height: 50px;
+        }
+        .hero-bg {
+          min-height: 70vh;
+          height: auto;
+        }
+      }
+
+      /* Fresh badge animation */
+      .fresh-badge {
+        background: linear-gradient(135deg, #fef3c7, #fde68a);
+        animation: subtlePulse 2s infinite;
+      }
+
+      @keyframes subtlePulse {
+        0% {
+          opacity: 0.9;
+        }
+        50% {
+          opacity: 1;
+          box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+        }
+        100% {
+          opacity: 0.9;
+        }
+      }
+    </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://imgbob.net/ib/UskiWdAliIgoFNa_1775485582.jpeg">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://imgbob.net/ib/UskiWdAliIgoFNa_1775485582.jpeg">
+    <link rel="apple-touch-icon" href="https://imgbob.net/ib/UskiWdAliIgoFNa_1775485582.jpeg">	
+    <link rel="shortcut icon" href="https://imgbob.net/ib/UskiWdAliIgoFNa_1775485582.jpeg">
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navbar - Mobile Friendly -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3">
+        <div class="flex justify-between items-center">
+          <img
+            src="https://imgbob.net/ib/UskiWdAliIgoFNa_1775485582.jpeg"
+            class="logo-img"
+            alt="Royal Yolk JS Farms"
+          />
+
+          <!-- Desktop Menu -->
+          <div
+            class="hidden md:flex items-center gap-6 text-base font-semibold text-gray-700"
+          >
+            <a href="#home" class="hover:text-emerald-700 transition">Home</a>
+            <a href="#about" class="hover:text-emerald-700 transition">About</a>
+            <a href="#ethics" class="hover:text-emerald-700 transition"
+              >Our Ethics</a
+            >
+            <a href="#products" class="hover:text-emerald-700 transition"
+              >Products</a
+            >
+            <a href="#wholesale" class="hover:text-emerald-700 transition"
+              >Wholesale</a
+            >
+            <a href="#organic" class="hover:text-emerald-700 transition"
+              >Organic Eggs</a
+            >
+            <a href="#contact" class="hover:text-emerald-700 transition"
+              >Contact</a
+            >
+          </div>
+
+          <!-- Cart Icon -->
+          <div class="relative">
+            <button
+              id="cart-btn"
+              class="text-2xl text-gray-700 hover:text-emerald-700 transition"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span id="cart-count" class="cart-badge hidden">0</span>
+            </button>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <button id="menu-btn" class="md:hidden text-2xl text-gray-700 ml-3">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Links -->
+        <div
+          id="mobile-menu"
+          class="md:hidden mt-4 pb-3 border-t border-gray-100 pt-3"
+        >
+          <div class="flex flex-col gap-3 text-base font-medium text-gray-700">
+            <a href="#home" class="hover:text-emerald-700 py-1">Home</a>
+            <a href="#about" class="hover:text-emerald-700 py-1">About</a>
+            <a href="#ethics" class="hover:text-emerald-700 py-1">Our Ethics</a>
+            <a href="#products" class="hover:text-emerald-700 py-1">Products</a>
+            <a href="#wholesale" class="hover:text-emerald-700 py-1"
+              >Wholesale</a
+            >
+            <a href="#organic" class="hover:text-emerald-700 transition"
+              >Organic Eggs</a
+            >
+            <a href="#contact" class="hover:text-emerald-700 py-1">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section
+      id="home"
+      class="hero-bg min-h-[80vh] flex items-center text-white"
+    >
+      <div class="max-w-7xl mx-auto px-5 text-center">
+        <h1
+          class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight"
+        >
+          Fresh White Eggs from <br />Healthy Chickens
+        </h1>
+        <p
+          class="text-base sm:text-lg md:text-xl max-w-2xl mx-auto opacity-95 px-3"
+        >
+          Straight from our farm to your table — no storage, no middlemen, just
+          pure freshness.
+        </p>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-16 sm:py-20 bg-white">
+      <div
+        class="max-w-7xl mx-auto px-5 grid md:grid-cols-2 gap-10 items-center"
+      >
+        <div>
+          <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+            About Royal Yolk JS Farms
+          </h2>
+          <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
+            Royal Yolk JS Farms has been proudly operating in Rawalpindi,
+            Pakistan, for over two years. We specialize in high-quality white
+            layer chicken farming and the production of fresh, nutritious eggs.
+            Our three modern poultry farms are located on Adyala Road,
+            Rawalpindi. We maintain strict hygiene standards, use balanced
+            feeding systems, and follow daily egg collection and health
+            monitoring practices to ensure consistent quality and freshness. At
+            Royal Yolk JS Farms, we are committed to ethical farming, animal
+            welfare, and delivering wholesome white eggs to families and markets
+            across Rawalpindi and beyond.
+          </p>
+        </div>
+        <img
+          src="https://i.ibb.co/C3xB6zYN/about.jpg"
+          class="rounded-2xl shadow-xl w-full object-cover h-64 sm:h-80"
+          alt="Farm"
+        />
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="py-16 bg-emerald-50">
+      <div class="max-w-7xl mx-auto px-5">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-10">
+          Our Farm & Happy Hens
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          <img
+            src="https://i.ibb.co/67f5GSfj/1.jpg"
+            class="rounded-2xl h-64 w-full object-cover shadow-md"
+          />
+          <img
+            src="https://i.ibb.co/pvG6fwnp/2.jpg"
+            class="rounded-2xl h-64 w-full object-cover shadow-md"
+          />
+          <img
+            src="https://i.ibb.co/8gzbBDLc/3.jpg"
+            class="rounded-2xl h-64 w-full object-cover shadow-md"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Ethics -->
+    <section id="ethics" class="py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-5 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-10">
+          The Ethics of Stress-Free Farming
+        </h2>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 text-left">
+          <div class="p-4">
+            <i
+              class="fa-solid fa-leaf text-4xl text-emerald-600 mb-3 block"
+            ></i>
+            <h3 class="font-bold text-xl mb-2">Natural Feeding</h3>
+            <p class="text-gray-600 text-sm">
+              Balanced poultry feed ensures strong hens and better egg quality.
+            </p>
+          </div>
+          <div class="p-4">
+            <i
+              class="fa-solid fa-shield text-4xl text-emerald-600 mb-3 block"
+            ></i>
+            <h3 class="font-bold text-xl mb-2">Clean Environment</h3>
+            <p class="text-gray-600 text-sm">
+              Daily cleaning, proper ventilation, and disease control systems.
+            </p>
+          </div>
+          <div class="p-4">
+            <i
+              class="fa-solid fa-heart text-4xl text-emerald-600 mb-3 block"
+            ></i>
+            <h3 class="font-bold text-xl mb-2">Animal Welfare</h3>
+            <p class="text-gray-600 text-sm">
+              Stress-free hens produce healthier and more consistent eggs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RETAIL SECTION - Farm Fresh Messaging Added -->
+    <section id="products" class="py-16 bg-emerald-50">
+      <div class="max-w-7xl mx-auto px-5">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl sm:text-4xl font-bold mb-3">
+            Our Fresh Egg Packs
+          </h2>
+          <!-- FARM FRESH ATTRACTION MESSAGE -->
+          <div class="max-w-2xl mx-auto mb-6">
+            <div
+              class="fresh-badge inline-flex items-center gap-2 bg-amber-100 text-amber-800 px-5 py-2 rounded-full text-sm sm:text-base font-semibold shadow-sm"
+            >
+              <i class="fa-solid fa-tractor text-emerald-700"></i>
+              <span>🐔 Directly from Farm — Zero Storage Time!</span>
+            </div>
+            <p class="text-gray-700 mt-4 text-sm sm:text-base leading-relaxed">
+              <span class="font-bold text-emerald-700"
+                >⚠️ Not shop eggs · Not bakery eggs · Not stored eggs</span
+              ><br />
+              Our eggs go from
+              <span class="font-semibold">hen → collection → your table</span>
+              within hours. No cold storage, no weeks-old inventory. What you
+              get is what we collected
+              <span class="font-semibold italic">this morning</span> —
+              farm-fresh, nutrient-rich, and naturally delicious.
+            </p>
+          </div>
+        </div>
+
+        <!-- Product Grid - Mobile Responsive -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <!-- 6 Eggs -->
+          <div class="product-card rounded-2xl p-4 sm:p-5 text-center">
+            <div
+              class="bg-gradient-to-br from-amber-50 to-white rounded-xl p-3 mb-3"
+            >
+              <img
+                src="https://i.ibb.co/pBFw8DrD/4602adad-9746-458f-8ed9-13c95936c41a.png"
+                class="tray-img mx-auto"
+                alt="Royal Yolk 6 Eggs"
+              />
+              <div class="mt-2 text-center">
+                <p
+                  class="text-[10px] sm:text-xs font-bold text-emerald-800 bg-emerald-50 inline-block px-3 py-1 rounded-full"
+                >
+                  Farm Fresh Eggs
+                </p>
+              </div>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold">6 Eggs Pack</h3>
+            <p class="text-gray-500 text-xs sm:text-sm mb-1">
+              Small family breakfast
+            </p>
+            <p class="text-xl sm:text-2xl font-bold text-emerald-700 mb-3">
+              ₨ 150
+            </p>
+            <button
+              onclick="addToCart(6, 150, '6 Eggs Pack')"
+              class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-full font-semibold w-full text-sm transition"
+            >
+              <i class="fa-solid fa-cart-plus mr-1"></i>Add to Cart
+            </button>
+          </div>
+
+          <!-- 12 Eggs -->
+          <div class="product-card rounded-2xl p-4 sm:p-5 text-center">
+            <div
+              class="bg-gradient-to-br from-amber-50 to-white rounded-xl p-3 mb-3"
+            >
+              <img
+                src="https://i.ibb.co/W4QTKtqs/f0097dea-c6de-4ec5-a882-7aa0691a91ce.png"
+                class="tray-img mx-auto"
+                alt="Royal Yolk 12 Eggs"
+              />
+              <div class="mt-2 text-center">
+                <p
+                  class="text-[10px] sm:text-xs font-bold text-emerald-800 bg-emerald-50 inline-block px-3 py-1 rounded-full"
+                >
+                  Farm Fresh Eggs
+                </p>
+              </div>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold">12 Eggs Pack</h3>
+            <p class="text-gray-500 text-xs sm:text-sm mb-1">
+              Most popular pack
+            </p>
+            <p class="text-xl sm:text-2xl font-bold text-emerald-700 mb-3">
+              ₨ 290
+            </p>
+            <button
+              onclick="addToCart(12, 290, '12 Eggs Pack')"
+              class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-full font-semibold w-full text-sm transition"
+            >
+              <i class="fa-solid fa-cart-plus mr-1"></i>Add to Cart
+            </button>
+          </div>
+
+          <!-- 24 Eggs -->
+          <div class="product-card rounded-2xl p-4 sm:p-5 text-center">
+            <div
+              class="bg-gradient-to-br from-amber-50 to-white rounded-xl p-3 mb-3"
+            >
+              <img
+                src="https://i.ibb.co/rGgThXmn/57062bd1-4886-4757-82ac-bcefcd961418.png"
+                class="tray-img mx-auto"
+                alt="Royal Yolk 24 Eggs"
+              />
+              <div class="mt-2 text-center">
+                <p
+                  class="text-[10px] sm:text-xs font-bold text-emerald-800 bg-emerald-50 inline-block px-3 py-1 rounded-full"
+                >
+                  Farm Fresh Eggs
+                </p>
+              </div>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold">24 Eggs Pack</h3>
+            <p class="text-gray-500 text-xs sm:text-sm mb-1">
+              Family size value
+            </p>
+            <p class="text-xl sm:text-2xl font-bold text-emerald-700 mb-3">
+              ₨ 590
+            </p>
+            <button
+              onclick="addToCart(24, 590, '24 Eggs Pack')"
+              class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-full font-semibold w-full text-sm transition"
+            >
+              <i class="fa-solid fa-cart-plus mr-1"></i>Add to Cart
+            </button>
+          </div>
+
+          <!-- 30 Eggs -->
+          <div class="product-card rounded-2xl p-4 sm:p-5 text-center">
+            <div
+              class="bg-gradient-to-br from-amber-50 to-white rounded-xl p-3 mb-3"
+            >
+              <img
+                src="https://i.ibb.co/7xc7hKbx/8106ae07-625b-4b1b-8b6d-915b07552f69.png"
+                class="tray-img mx-auto"
+                alt="Royal Yolk 30 Eggs"
+              />
+              <div class="mt-2 text-center">
+                <p
+                  class="text-[10px] sm:text-xs font-bold text-emerald-800 bg-emerald-50 inline-block px-3 py-1 rounded-full"
+                >
+                  Farm Fresh Eggs
+                </p>
+              </div>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold">30 Eggs Tray</h3>
+            <p class="text-gray-500 text-xs sm:text-sm mb-1">Bulk buyer tray</p>
+            <p class="text-xl sm:text-2xl font-bold text-emerald-700 mb-3">
+              ₨ 875
+            </p>
+            <button
+              onclick="addToCart(30, 875, '30 Eggs Tray')"
+              class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-full font-semibold w-full text-sm transition"
+            >
+              <i class="fa-solid fa-cart-plus mr-1"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <!-- Retail Info Box - No Names, Just Roles & Numbers -->
+        <div
+          class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg border border-emerald-100 p-5 sm:p-7"
+        >
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-lg sm:text-xl font-bold text-emerald-800 mb-2">
+                <i class="fa-solid fa-location-dot mr-2"></i> Service Area
+              </h3>
+              <p class="text-gray-700 font-medium">
+                📍 Rawalpindi & Islamabad only
+              </p>
+              <p class="text-xs text-gray-500 mt-1">
+                Orders outside these cities will not be processed.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-lg sm:text-xl font-bold text-emerald-800 mb-2">
+                <i class="fa-solid fa-credit-card mr-2"></i> Payment & Delivery
+              </h3>
+              <p class="text-gray-700 text-sm">
+                ✅ JazzCash · EasyPaisa<br />🚚 Transportation charges extra
+                (based on location)<br />💰 Pay after order confirmation
+              </p>
+            </div>
+          </div>
+		  <!-- ✅ ADD THIS LINE RIGHT HERE -->
+		  <div class="bg-emerald-100 text-emerald-800 text-sm font-semibold text-center py-2 px-4 rounded-xl mb-4">
+				🚚 Free Delivery on orders above ₨1000
+		  </div>
+          <div
+            class="border-t border-gray-200 mt-5 pt-5 flex flex-col sm:flex-row justify-between items-center gap-3"
+          >
+            <a
+              href="https://wa.me/923005502633"
+              class="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2.5 rounded-full font-semibold text-sm transition w-full sm:w-auto justify-center"
+            >
+              <i class="fab fa-whatsapp text-lg"></i> Retail Orders
+            </a>
+            <p class="text-xs text-gray-500">
+              <i class="fa-regular fa-clock mr-1"></i> Response: 10min–2hrs |
+              +92 300 5502633
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wholesale Section - Improved -->
+    <section id="wholesale" class="py-16 bg-emerald-700 text-white">
+      <div class="max-w-6xl mx-auto text-center px-5">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Wholesale Supply</h2>
+
+        <p class="text-emerald-200 text-base sm:text-lg mb-6 max-w-2xl mx-auto">
+          Supplying consistent, high-quality fresh eggs to bakeries, shops,
+          restaurants, and distributors across Rawalpindi & Islamabad.
+        </p>
+
+        <!-- Business Types -->
+        <div
+          class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 max-w-3xl mx-auto text-sm"
+        >
+          <div class="bg-white/10 p-4 rounded-xl">
+            <i class="fa-solid fa-bread-slice text-2xl mb-2 text-amber-300"></i>
+            <p>Bakery</p>
+          </div>
+          <div class="bg-white/10 p-4 rounded-xl">
+            <i class="fa-solid fa-store text-2xl mb-2 text-emerald-300"></i>
+            <p>Shops</p>
+          </div>
+          <div class="bg-white/10 p-4 rounded-xl">
+            <i class="fa-solid fa-utensils text-2xl mb-2 text-yellow-300"></i>
+            <p>Restaurants</p>
+          </div>
+          <div class="bg-white/10 p-4 rounded-xl">
+            <i class="fa-solid fa-truck text-2xl mb-2 text-blue-300"></i>
+            <p>Suppliers</p>
+          </div>
+        </div>
+
+        <!-- Service Area -->
+        <div
+          class="bg-amber-500/20 border border-amber-400/40 rounded-xl p-3 mb-8 max-w-2xl mx-auto text-sm"
+        >
+          <p>
+            <i class="fa-solid fa-location-dot mr-2"></i>
+            <strong>Wholesale Service Area:</strong> Rawalpindi & Islamabad only
+          </p>
+        </div>
+
+        <!-- Quality Highlight -->
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-xl p-5 mb-8 max-w-2xl mx-auto"
+        >
+          <h3 class="text-lg font-bold mb-2 text-amber-300">
+            Premium Eggs for Bakeries
+          </h3>
+          <p class="text-emerald-200 text-sm">
+            We provide large-size, thick-shell eggs with rich yolks — perfect
+            for cakes, pastries, and commercial baking. Consistent quality
+            guaranteed.
+          </p>
+        </div>
+
+        <!-- Contact Cards -->
+        <div
+          class="max-w-3xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8"
+        >
+          <h3 class="text-xl sm:text-2xl font-bold mb-5">Wholesale Team</h3>
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div class="bg-white/5 p-5 rounded-xl">
+              <i class="fab fa-whatsapp text-3xl text-emerald-300 mb-2"></i>
+              <h4 class="text-lg font-bold">Wholesale Manager</h4>
+              <p class="text-emerald-200 text-xs mb-2">
+                Bulk orders & partnerships
+              </p>
+              <a
+                href="https://wa.me/923215284088"
+                class="inline-block bg-emerald-600 hover:bg-emerald-500 px-4 py-2 rounded-full text-sm font-semibold"
+              >
+                +92 321 5284088
+              </a>
+            </div>
+
+            <div class="bg-white/5 p-5 rounded-xl">
+              <i class="fab fa-whatsapp text-3xl text-emerald-300 mb-2"></i>
+              <h4 class="text-lg font-bold">Wholesale Coordinator</h4>
+              <p class="text-emerald-200 text-xs mb-2">Supply & delivery</p>
+              <a
+                href="https://wa.me/923335534588"
+                class="inline-block bg-emerald-600 hover:bg-emerald-500 px-4 py-2 rounded-full text-sm font-semibold"
+              >
+                +92 333 5534588
+              </a>
+            </div>
+          </div>
+
+          <p class="text-emerald-300 text-xs mt-5">
+            * Prices vary daily based on market rates. Contact for latest
+            wholesale pricing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Organic Eggs Section -->
+    <section id="organic" class="py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-5 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-emerald-800">
+          Organic Eggs
+        </h2>
+
+        <p class="text-gray-600 max-w-2xl mx-auto mb-6 text-sm sm:text-base">
+          While our farm specializes in high-quality white layer eggs, we also
+          arrange organic and premium-grade eggs through trusted partner farms
+          for customers requiring specialized supply.
+        </p>
+
+        <!-- Transparency Box -->
+        <div
+          class="max-w-2xl mx-auto bg-gray-50 border border-gray-200 rounded-xl p-5 mb-8 text-sm text-gray-700"
+        >
+          <p>
+            <span class="font-semibold">Note:</span> Organic eggs are not
+            produced on our farm. These are sourced on demand from selected
+            farms that follow organic farming practices.
+          </p>
+        </div>
+
+        <!-- Features -->
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10 text-left">
+          <div class="bg-emerald-50 p-5 rounded-xl">
+            <i class="fa-solid fa-leaf text-3xl text-emerald-600 mb-3"></i>
+            <h3 class="font-bold text-lg mb-1">Sourced from Trusted Farms</h3>
+            <p class="text-gray-600 text-sm">
+              Carefully selected suppliers ensuring consistent quality.
+            </p>
+          </div>
+
+          <div class="bg-emerald-50 p-5 rounded-xl">
+            <i class="fa-solid fa-egg text-3xl text-amber-500 mb-3"></i>
+            <h3 class="font-bold text-lg mb-1">Premium Quality Eggs</h3>
+            <p class="text-gray-600 text-sm">
+              Higher-grade eggs suitable for health-focused customers and
+              bakeries.
+            </p>
+          </div>
+
+          <div class="bg-emerald-50 p-5 rounded-xl">
+            <i class="fa-solid fa-clock text-3xl text-blue-400 mb-3"></i>
+            <h3 class="font-bold text-lg mb-1">On-Demand Supply</h3>
+            <p class="text-gray-600 text-sm">
+              Available on advance order depending on availability.
+            </p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div
+          class="bg-emerald-700 text-white rounded-2xl p-6 max-w-xl mx-auto shadow-lg"
+        >
+          <h3 class="text-lg font-bold mb-2">For Organic Egg Inquiries</h3>
+          <p class="text-emerald-200 text-sm mb-4">
+            Contact our retail department for availability, pricing, and advance
+            booking.
+          </p>
+
+          <a
+            href="https://wa.me/923005502633"
+            class="inline-flex items-center gap-2 bg-white text-emerald-700 px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-100 transition"
+          >
+            <i class="fab fa-whatsapp text-lg"></i> Contact Retail Department
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section with Google Maps -->
+    <section id="contact" class="py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl sm:text-4xl font-bold mb-2">Get In Touch</h2>
+          <p class="text-gray-600 text-sm">
+            Visit our farm or contact us for orders
+          </p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="space-y-5">
+            <div class="flex gap-3">
+              <i
+                class="fa-solid fa-location-dot text-xl text-emerald-700 mt-1"
+              ></i>
+              <div>
+                <p class="font-semibold">Farm Location</p>
+                <p class="text-gray-600 text-sm">
+                  Jabbar Miana Gidhpur, Adyala Road, Rawalpindi
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <i class="fa-solid fa-phone text-xl text-emerald-700 mt-1"></i>
+              <div>
+                <p class="font-semibold">Retail Orders</p>
+                <a
+                  href="https://wa.me/923005502633"
+                  class="text-emerald-700 text-sm"
+                  >+92 300 5502633</a
+                >
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <i
+                class="fa-brands fa-whatsapp text-xl text-emerald-700 mt-1"
+              ></i>
+              <div>
+                <p class="font-semibold">Wholesale</p>
+                <p class="text-sm">
+                  <a href="https://wa.me/923215284088" class="text-emerald-700"
+                    >+92 321 5284088</a
+                  >
+                  /
+                  <a href="https://wa.me/923335534588" class="text-emerald-700"
+                    >+92 333 5534588</a
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="bg-emerald-50 p-4 rounded-xl">
+              <p class="font-semibold text-sm">
+                <i class="fa-regular fa-clock mr-2"></i> Business Hours
+              </p>
+              <p class="text-xs">
+                Monday to Saturday: 8:00 AM – 6:00 PM<br />Sunday: Closed
+              </p>
+            </div>
+          </div>
+          <div class="rounded-xl overflow-hidden shadow-lg h-72 md:h-auto">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3319.123456789!2d73.123456!3d33.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38df918d9e8c2b6d%3A0x7a5c8f5e6d4b3c2a!2sRawalpindi%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1700000000000"
+              width="100%"
+              height="100%"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              title="Farm location"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+<footer class="bg-gray-900 text-white py-8">
+  <div class="max-w-6xl mx-auto px-5 text-center">
+    <img
+      src="https://imgbob.net/ib/UskiWdAliIgoFNa_1775485582.jpeg"
+      class="h-10 mx-auto mb-3 opacity-90"
+    />
+
+    <p class="text-gray-400 text-xs">
+      © 2026 Royal Yolk JS Farms - Jabbar Miana Gidhpur, Adyala Road,
+      Rawalpindi
+    </p>
+
+    <p class="text-gray-500 text-[11px] mt-1">
+      Serving Rawalpindi & Islamabad Only | JazzCash • EasyPaisa
+    </p>
+
+    <p class="text-emerald-400 text-[10px] mt-2">
+      🐔 Direct farm eggs — zero storage, zero middlemen
+    </p>
+
+    <!-- Social Media Section -->
+    <div class="mt-5">
+      <p class="text-gray-400 text-xs mb-2">Follow us on </p>
+      <div class="flex justify-center gap-4 opacity-60">
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/profile.php?id=61572059695948" rel="noopener noreferrer">
+  <div class="hover:opacity-100 transition cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-white" viewBox="0 0 24 24">
+      <path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.6v-2.9h2.6V9.4c0-2.6 1.6-4.1 4-4.1 1.2 0 2.4.2 2.4.2v2.7h-1.4c-1.4 0-1.8.9-1.8 1.7v2h3.1l-.5 2.9h-2.6v7A10 10 0 0 0 22 12"/>
+    </svg>
+  </div>
+</a>
+
+        <!-- Instagram -->
+        <div class="hover:opacity-100 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-white" viewBox="0 0 24 24">
+            <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm5 5.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2zm6.2-.9a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z"/>
+          </svg>
+        </div>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/923335534588?text=Hi%20I%27m%20interested%20in%20your%20products" target="_blank" rel="noopener noreferrer">
+  <div class="hover:opacity-100 transition cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-white hover:fill-green-500 transition" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 0 0-8.9 14.6L2 22l5.6-1.1A10 10 0 1 0 12 2zm5.3 13.6c-.2.5-1.1 1-1.6 1.1-.4.1-.9.2-1.5 0-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4.2-4.7-4.4-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-1.9 1-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.7.7 1.8.1.2.1.4 0 .6s-.2.4-.3.5c-.2.2-.3.4-.5.6-.2.2-.4.4-.2.8.2.4.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.8.4.2.6.2.8 0 .2-.2.9-1 .9-1.3.1-.2.2-.2.4-.1.2.1 1.3.6 1.5.7.2.1.3.2.3.3 0 .1 0 .6-.2 1.1z"/>
+    </svg>
+  </div>
+</a>
+
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+    <!-- Cart Modal -->
+    <div
+      id="cart-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center modal p-4"
+    >
+      <div
+        class="bg-white rounded-2xl max-w-md w-full max-h-[85vh] overflow-y-auto"
+      >
+        <div
+          class="sticky top-0 bg-white p-4 border-b flex justify-between items-center"
+        >
+          <h2 class="text-xl font-bold">Your Cart 🛒</h2>
+          <button
+            id="close-cart"
+            class="text-2xl text-gray-500 hover:text-gray-800"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="p-4">
+          <div id="cart-items" class="space-y-3 mb-4"></div>
+          <div class="border-t pt-3 mb-4">
+            <div class="flex justify-between text-lg font-bold">
+              <span>Subtotal:</span>
+              <span id="cart-total">₨ 0</span>
+            </div>
+            <p class="text-[11px] text-gray-500 mt-1">
+              * Transportation charges added separately
+            </p>
+          </div>
+          
+          <!-- EMAIL FIELD ADDED HERE -->
+          <input
+            type="email"
+            id="customer-email"
+            placeholder="Your Email (optional - for order receipt)"
+            class="w-full border rounded-xl px-4 py-2.5 text-sm mb-2"
+          />
+          
+          <input
+            type="text"
+            id="customer-name"
+            placeholder="Your Full Name"
+            class="w-full border rounded-xl px-4 py-2.5 text-sm mb-2"
+          />
+          <input
+            type="tel"
+            id="customer-phone"
+            placeholder="Your WhatsApp Number"
+            class="w-full border rounded-xl px-4 py-2.5 text-sm mb-2"
+          />
+          <textarea
+            id="customer-address"
+            rows="2"
+            placeholder="Delivery Address (Rawalpindi / Islamabad only)"
+            class="w-full border rounded-xl px-4 py-2.5 text-sm mb-2"
+          ></textarea>
+          <div
+            class="bg-amber-50 text-amber-800 text-[11px] p-2 rounded-xl mb-3"
+          >
+            📍 We deliver only in Rawalpindi & Islamabad
+          </div>
+          <button
+            id="place-order-btn"
+            class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-semibold py-2.5 rounded-xl text-sm transition"
+          >
+            Place Order via WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let cart = [];
+	  // Initialize EmailJS - REPLACE WITH YOUR ACTUAL KEY
+		(function() {
+			emailjs.init("vasKp9Kl2k2VO0XAg"); // Paste your Public Key here
+		})();
+      function updateCartUI() {
+  const count = cart.reduce((s, i) => s + i.quantity, 0);
+  const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+
+  const badge = document.getElementById("cart-count");
+  if (badge) {
+    badge.innerText = count;
+    badge.classList.toggle("hidden", count === 0);
+  }
+
+  const container = document.getElementById("cart-items");
+
+  if (container) {
+    if (cart.length === 0) {
+      container.innerHTML =
+        '<p class="text-gray-500 text-center py-5 text-sm">Cart is empty 🥚</p>';
+    } else {
+      container.innerHTML = cart
+        .map(
+          (item, idx) => `
+        <div class="flex justify-between items-center border-b pb-3">
+          
+          <div class="flex-1">
+            <span class="font-semibold text-sm">${item.name}</span>
+            <p class="text-xs text-gray-500">
+              ₨${item.price} × ${item.quantity} = ₨${item.price * item.quantity}
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="decreaseQty(${idx})" class="px-2 bg-gray-200 rounded">-</button>
+            <span class="font-bold text-sm">${item.quantity}</span>
+            <button onclick="increaseQty(${idx})" class="px-2 bg-gray-200 rounded">+</button>
+
+            <button onclick="removeFromCart(${idx})" class="text-red-500 ml-2">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+
+        </div>
+      `,
+        )
+        .join("");
+    }
+
+    document.getElementById("cart-total").innerText = `₨ ${total}`;
+  }
+}
+      function addToCart(eggs, price, name) {
+        let existing = cart.find((i) => i.name === name);
+        existing
+          ? existing.quantity++
+          : cart.push({ eggs, price, name, quantity: 1 });
+        updateCartUI();
+      }
+      function removeFromCart(i) {
+        cart.splice(i, 1);
+        updateCartUI();
+      }
+      
+      // UPDATED placeOrder function with email field
+      function placeOrder() {
+  let name = document.getElementById("customer-name")?.value.trim();
+  let phone = document.getElementById("customer-phone")?.value.trim();
+  let email = document.getElementById("customer-email")?.value.trim();
+  let addr = document.getElementById("customer-address")?.value.trim();
+  
+  if (!name || !phone || !addr) return alert("Please fill all fields");
+  if (!addr.toLowerCase().includes("rawalpindi") && !addr.toLowerCase().includes("islamabad"))
+    return alert("We only deliver to Rawalpindi & Islamabad");
+  if (cart.length === 0) return alert("Cart is empty");
+  
+  let subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+  let delivery = subtotal >= 1000 ? 0 : 200;
+  let finalTotal = subtotal + delivery;
+  
+  // Build order details string for email
+  let orderDetailsText = cart.map(i => `${i.name}: ${i.quantity} × ₨${i.price} = ₨${i.price * i.quantity}`).join("\n");
+  
+  // WhatsApp message
+  let msg = `🥚 ROYAL YOLK JS FARMS - FARM FRESH ORDER 🥚\n\n` +
+	`⚠️ Please do not edit order details below. Send as it is for fast processing.\n\n` +
+    `👤 Customer: ${name}\n` +
+    `📞 Phone: ${phone}\n` +
+    `📧 Email: ${email || "Not provided"}\n` +
+    `📍 Address: ${addr}\n\n` +
+    `📦 ORDER:\n${orderDetailsText}\n\n` +
+    `💰 Subtotal: ₨${subtotal}\n` +
+    `🚚 Transport: ₨${delivery}${delivery === 0 ? " (FREE)" : ""}\n` +
+	`🧾 Total: ₨${finalTotal}\n\n` +
+    `💳 Payment: JazzCash/EasyPaisa after confirmation\n\n` +
+    `🐔 Direct farm eggs — collected today, zero storage time!`;
+  
+  window.open(`https://wa.me/923005502633?text=${encodeURIComponent(msg)}`, "_blank");
+  
+  // =============================================
+  // SEND EMAIL TO CUSTOMER (if email provided)
+  // REPLACE WITH YOUR SERVICE ID AND TEMPLATE ID
+  // =============================================
+  if (email && email.includes("@")) {
+    emailjs.send("service_8cjpain", "template_n685rtn", {
+      to_email: email,        // ← ADD THIS LINE
+      customer_name: name,
+      customer_phone: phone,
+      customer_address: addr,
+      order_details: orderDetailsText,
+      total: subtotal
+    }).then(function(response) {
+      console.log("Email sent successfully!", response);
+      alert("Order confirmation sent to your email!");
+    }).catch(function(error) {
+      console.log("Email failed:", error);
+	  
+      <!--alert("Email failed to send. You will still receive WhatsApp confirmation.");-->
+    });
+  }
+  // Clear cart and form
+  cart = [];
+  updateCartUI();
+  document.getElementById("cart-modal").classList.add("hidden");
+  document.getElementById("customer-name").value = "";
+  document.getElementById("customer-phone").value = "";
+  document.getElementById("customer-email").value = "";
+  document.getElementById("customer-address").value = "";
+}
+      
+      document.getElementById("cart-btn")?.addEventListener("click", () => {
+        updateCartUI();
+        document.getElementById("cart-modal").classList.remove("hidden");
+        document.getElementById("cart-modal").classList.add("flex");
+      });
+      document
+        .getElementById("close-cart")
+        ?.addEventListener("click", () =>
+          document.getElementById("cart-modal").classList.add("hidden"),
+        );
+      document
+        .getElementById("place-order-btn")
+        ?.addEventListener("click", placeOrder);
+      document
+        .getElementById("cart-modal")
+        ?.addEventListener(
+          "click",
+          (e) =>
+            e.target === document.getElementById("cart-modal") &&
+            document.getElementById("cart-modal").classList.add("hidden"),
+        );
+     // Toggle hamburger menu
+		document.getElementById("menu-btn")?.addEventListener("click", () => {
+  		let m = document.getElementById("mobile-menu");
+  		m.style.display = m.style.display === "block" ? "none" : "block";
+		});
+
+	// Close hamburger menu automatically when clicking any menu link
+		const mobileLinks = document.querySelectorAll("#mobile-menu a");
+		mobileLinks.forEach(link => {
+  		link.addEventListener("click", () => {
+    	document.getElementById("mobile-menu").style.display = "none";
+  		});
+	});
+	
+	function increaseQty(index) {
+  cart[index].quantity++;
+  updateCartUI();
+}
+
+function decreaseQty(index) {
+  cart[index].quantity--;
+
+  if (cart[index].quantity <= 0) {
+    cart.splice(index, 1);
+  }
+
+  updateCartUI();
+}
+		async function loadPrices() {
+  const url = "https://raw.githubusercontent.com/awais2k80-code/ittefaq-farms/main/prices.json";
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  document.querySelectorAll(".product-card").forEach(card => {
+    const title = card.querySelector("h3").innerText.trim();
+    const priceEl = card.querySelector("p.text-xl");
+
+    if (data[title]) {
+      priceEl.innerText = `₨ ${data[title]}`;
+
+      const btn = card.querySelector("button");
+      const eggs = parseInt(title);
+
+      btn.setAttribute(
+        "onclick",
+        `addToCart(${eggs}, ${data[title]}, '${title}')`
+      );
+    }
+  });
+}
+
+loadPrices();
+	
+    </script>
+  </body>
+</html> 
